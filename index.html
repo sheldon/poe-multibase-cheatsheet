@@ -59,11 +59,11 @@ body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;pa
 /* icon links */
 a.icon-item{text-decoration:none;color:inherit}
 /* ── phone mode: vertical scroll, full-width cards ── */
-body.phone{overflow-y:auto;height:auto}
+html.phone,body.phone{overflow-y:auto;height:auto}
 body.phone #output{flex:none;overflow:visible;height:auto}
 body.phone .bases-wrap{flex-direction:column;gap:3px}
 body.phone .base-card{width:100%}
-body.phone .base-label{min-width:76px;width:76px;flex-shrink:0}
+body.phone .base-label{min-width:80px;width:80px;flex-shrink:0}
 body.phone .icons-row{flex-wrap:wrap}
 </style>
 </head>
@@ -114,12 +114,16 @@ function applySize(s){
   r.setProperty('--gap',Math.max(2,Math.round(s*.065))+'px');
 }
 
-const PHONE_THRESHOLD=28;// px — below this, switch to scroll mode
+const PHONE_THRESHOLD=36;// px — below this, switch to scroll mode
+function setPhone(on){
+  document.documentElement.classList.toggle('phone',on);
+  document.body.classList.toggle('phone',on);
+}
 function fitToViewport(){
   const out=document.getElementById('output');
   if(!out.firstChild)return;
-  // First try desktop fit-to-screen
-  document.body.classList.remove('phone');
+  // Reset to desktop mode so clientHeight is accurate
+  setPhone(false);
   out.style.overflow='hidden';
   let lo=PHONE_THRESHOLD,hi=60,best=lo-1;
   while(lo<=hi){
@@ -129,12 +133,12 @@ function fitToViewport(){
     else hi=mid-1;
   }
   if(best>=PHONE_THRESHOLD){
-    applySize(best);// fits on screen — desktop mode
+    applySize(best);// fits — desktop mode
   }else{
-    // Too small to read — switch to phone scroll mode
-    document.body.classList.add('phone');
+    // Switch to phone scroll mode with readable icon size
     out.style.overflow='';
-    applySize(32);// comfortable phone icon size
+    setPhone(true);
+    applySize(44);
   }
 }
 
