@@ -2,95 +2,100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
 <title>PoE Multi-Base Unique Cheatsheet</title>
 <style>
+:root{--is:42px;--pf:9px;--nf:10px;--bf:9px;--gap:3px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;padding:6px}
-h1{text-align:center;color:#c8a96e;font-size:16px;margin-bottom:1px;text-shadow:0 0 14px rgba(200,169,110,0.35)}
-.subtitle{text-align:center;color:#555;font-size:10px;margin-bottom:5px}
-.controls{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:3px;flex-wrap:wrap}
+html,body{height:100%;overflow:hidden}
+body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;padding:5px;display:flex;flex-direction:column;gap:3px}
+h1{text-align:center;color:#c8a96e;font-size:15px;line-height:1;text-shadow:0 0 12px rgba(200,169,110,0.3)}
+.subtitle{text-align:center;color:#555;font-size:9px}
+.controls{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}
 .controls label{color:#aaa;font-size:11px}
-select{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:4px;padding:3px 7px;font-size:11px;cursor:pointer}
+select{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:4px;padding:2px 6px;font-size:11px;cursor:pointer}
 select:focus{outline:2px solid #c8a96e}
 .min-price-wrap{display:flex;align-items:center;gap:3px;font-size:11px;color:#aaa}
-input[type=number]{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:4px;padding:3px 5px;font-size:11px;width:46px;text-align:center}
+input[type=number]{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:4px;padding:2px 5px;font-size:11px;width:44px;text-align:center}
 input[type=number]:focus{outline:2px solid #c8a96e}
-button{background:#238636;color:#fff;border:none;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:600;transition:background 0.15s}
+button{background:#238636;color:#fff;border:none;border-radius:4px;padding:2px 9px;font-size:11px;cursor:pointer;font-weight:600}
 button:hover{background:#2ea043}
-button:disabled{background:#333;color:#666;cursor:not-allowed}
-.status{text-align:center;color:#555;font-size:10px;margin-bottom:4px;min-height:12px}
+button:disabled{background:#333;color:#555;cursor:not-allowed}
+.status{text-align:center;color:#555;font-size:9px;line-height:1}
 .status.loading{color:#c8a96e}
 .status.error{color:#f85149}
-.legend{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:5px}
+.legend{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
 .legend-item{display:flex;align-items:center;gap:2px;font-size:9px;color:#666}
 .legend-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-/* ── main layout ── */
-.bases-wrap{display:flex;flex-wrap:wrap;gap:3px;align-items:flex-start}
-.base-card{display:flex;align-items:stretch;background:#181e25;border:1px solid #2d333b;border-radius:4px;overflow:hidden;cursor:default}
+/* ── card area ── */
+#output{flex:1;overflow:hidden;min-height:0}
+.bases-wrap{display:flex;flex-wrap:wrap;gap:var(--gap);align-content:flex-start;align-items:flex-start}
+.base-card{display:flex;align-items:stretch;background:#181e25;border:1px solid #2d333b;border-radius:4px;overflow:hidden}
 .base-card:hover{border-color:#444c56;background:#1c2330}
-.base-label{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:4px 7px 4px 6px;min-width:0;border-right:1px solid #2d333b}
-.base-name{font-size:10px;font-weight:700;color:#c8a96e;white-space:nowrap;line-height:1.1}
-.base-max{font-size:9px;font-weight:700;padding:1px 4px;border-radius:6px;white-space:nowrap;line-height:1.3;align-self:flex-start}
-.icons-row{display:flex;gap:1px;align-items:center;padding:3px 4px}
-.icon-item{display:flex;flex-direction:column;align-items:center;gap:1px;border-radius:3px;padding:2px 3px;border:1px solid transparent;transition:background 0.1s}
+.base-label{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:3px 5px 3px 5px;border-right:1px solid #2d333b;min-width:0}
+.base-name{font-size:var(--nf);font-weight:700;color:#c8a96e;white-space:nowrap;line-height:1.1}
+.base-max{font-size:var(--bf);font-weight:700;padding:1px 4px;border-radius:5px;white-space:nowrap;line-height:1.3;align-self:flex-start}
+.icons-row{display:flex;flex-wrap:nowrap;gap:1px;align-items:center;padding:3px 3px}
+.icon-item{display:flex;flex-direction:column;align-items:center;gap:1px;border-radius:3px;padding:2px;border:1px solid transparent;flex-shrink:0}
 .icon-item:hover{background:rgba(255,255,255,0.07);border-color:#3d444d}
-.icon-item img{width:42px;height:42px;object-fit:contain;display:block}
-.icon-placeholder{width:42px;height:42px;display:block}
-.icon-price{font-size:9px;font-weight:700;line-height:1;text-align:center;white-space:nowrap}
+.icon-item img{width:var(--is);height:var(--is);object-fit:contain;display:block}
+.icon-placeholder{width:var(--is);height:var(--is);display:block}
+.icon-price{font-size:var(--pf);font-weight:700;line-height:1;text-align:center;white-space:nowrap}
 /* tier — badge */
-.t-s.base-max{background:#b01010;color:#fff}
-.t-a.base-max{background:#c06800;color:#fff}
-.t-b.base-max{background:#907000;color:#fff}
-.t-c.base-max{background:#1e6020;color:#fff}
-.t-d.base-max{background:#1e3a5a;color:#ccc}
-.t-x.base-max{background:#222;color:#555}
-.t-boss.base-max{background:#004a52;color:#7ee}
-.t-special.base-max{background:#420060;color:#d8a}
+.t-s.base-max{background:#9a0e0e;color:#fff}
+.t-a.base-max{background:#b06000;color:#fff}
+.t-b.base-max{background:#846500;color:#fff}
+.t-c.base-max{background:#1a5a1a;color:#fff}
+.t-d.base-max{background:#1a3452;color:#aac}
+.t-x.base-max{background:#1e1e1e;color:#555}
+.t-boss.base-max{background:#004450;color:#7ee}
+.t-special.base-max{background:#3d0058;color:#d8a}
 /* tier — price label */
 .t-s .icon-price{color:#ff6060}
 .t-a .icon-price{color:#ffa040}
-.t-b .icon-price{color:#e8cc00}
-.t-c .icon-price{color:#48c848}
-.t-d .icon-price{color:#5080c0}
+.t-b .icon-price{color:#e0c800}
+.t-c .icon-price{color:#44c044}
+.t-d .icon-price{color:#4878b8}
 .t-x .icon-price{color:#444}
-.t-boss .icon-price{color:#00b8cc}
-.t-special .icon-price{color:#b060e0}
-.footer{text-align:center;color:#3a3a3a;font-size:9px;margin-top:6px;padding-top:5px;border-top:1px solid #181e25}
-.footer a{color:#3a5a80;text-decoration:none}
+.t-boss .icon-price{color:#00b0c4}
+.t-special .icon-price{color:#a050d8}
+.footer{text-align:center;color:#333;font-size:9px;padding-top:2px;border-top:1px solid #151b22;flex-shrink:0}
+.footer a{color:#385070;text-decoration:none}
 </style>
 </head>
 <body>
-<h1>&#x2697;&#xFE0F; PoE Multi-Base Unique Cheatsheet</h1>
-<p class="subtitle">Prices from poe.ninja &middot; Updated every 30 min &middot; Always ID these bases!</p>
-<div class="controls">
-  <label>League:</label>
-  <select id="leagueSelect" onchange="reloadLeague()">
-    <option value="Mirage">Mirage</option>
-    <option value="Mercenaries">Mercenaries</option>
-    <option value="Standard">Standard</option>
-    <option value="Hardcore Mercenaries">Hardcore Mercenaries</option>
-  </select>
-  <div class="min-price-wrap">
-    <label>Min:</label>
-    <input type="number" id="minPrice" value="5" min="0" step="1" oninput="render()">
-    <span>c</span>
+<div id="top">
+  <h1>&#x2697;&#xFE0F; PoE Multi-Base Unique Cheatsheet</h1>
+  <p class="subtitle">poe.ninja prices &middot; updated every 30 min &middot; always ID these bases!</p>
+  <div class="controls">
+    <label>League:</label>
+    <select id="leagueSelect" onchange="reloadLeague()">
+      <option value="Mirage">Mirage</option>
+      <option value="Mercenaries">Mercenaries</option>
+      <option value="Standard">Standard</option>
+      <option value="Hardcore Mercenaries">HC Mercenaries</option>
+    </select>
+    <div class="min-price-wrap">
+      <label>Min:</label>
+      <input type="number" id="minPrice" value="5" min="0" step="1" oninput="render()">
+      <span>c</span>
+    </div>
+    <button id="refreshBtn" onclick="loadAll()">&#x21BA; Refresh</button>
   </div>
-  <button id="refreshBtn" onclick="loadAll()">&#x21BA; Refresh</button>
-</div>
-<div class="status" id="status">Loading...</div>
-<div class="legend">
-  <div class="legend-item"><div class="legend-dot" style="background:#ff3232"></div>S 1k+</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#ff8c00"></div>A 100+</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#ffd700"></div>B 20+</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#50c850"></div>C 5+</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#6496c8"></div>D 2+</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#00c8dc"></div>Boss</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#b400ff"></div>Special</div>
+  <div class="status" id="status">Loading...</div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#ff3232"></div>S 1k+</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ff8c00"></div>A 100+</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffd700"></div>B 20+</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#50c850"></div>C 5+</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#6496c8"></div>D 2+</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#00c8dc"></div>Boss</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#b400ff"></div>Special</div>
+  </div>
 </div>
 <div id="output"></div>
 <div class="footer">
-  Data from <a href="https://poe.ninja" target="_blank">poe.ninja</a> &middot;
+  <a href="https://poe.ninja" target="_blank">poe.ninja</a> &middot;
   <a href="https://github.com/sheldonels/poe-multibase-cheatsheet" target="_blank">GitHub</a>
 </div>
 <script>
@@ -101,6 +106,30 @@ function tier(p){if(p>=1000)return"t-s";if(p>=100)return"t-a";if(p>=20)return"t-
 function fmt(p){if(p>=1000)return(p/1000).toFixed(1)+"k";if(p>=10)return Math.round(p)+"c";return p.toFixed(1)+"c"}
 function itemTier(n,p){if(CRAFTED.has(n))return"t-special";if(BOSS_ONLY.has(n))return"t-boss";return tier(p)}
 let cachedData={};
+
+function applySize(s){
+  const r=document.documentElement.style;
+  r.setProperty('--is',s+'px');
+  r.setProperty('--pf',Math.max(7,Math.round(s*.215))+'px');
+  r.setProperty('--nf',Math.max(8,Math.round(s*.245))+'px');
+  r.setProperty('--bf',Math.max(7,Math.round(s*.2))+'px');
+  r.setProperty('--gap',Math.max(2,Math.round(s*.065))+'px');
+}
+
+function fitToViewport(){
+  const out=document.getElementById('output');
+  if(!out.firstChild)return;
+  // binary search: largest icon size that fits without overflow
+  let lo=14,hi=54,best=lo;
+  while(lo<=hi){
+    const mid=(lo+hi)>>1;
+    applySize(mid);
+    if(out.scrollHeight<=out.clientHeight+1){best=mid;lo=mid+1;}
+    else hi=mid-1;
+  }
+  applySize(best);
+}
+
 function render(){
   const minPrice=Math.max(0,Number(document.getElementById("minPrice").value)||0);
   const league=document.getElementById("leagueSelect").value;
@@ -113,26 +142,32 @@ function render(){
     let c='<div class="base-card"><div class="base-label"><span class="base-name">'+baseName+'</span><span class="base-max '+maxT+'">'+fmt(items[0].chaosValue)+'</span></div><div class="icons-row">';
     for(const item of items){
       const t=itemTier(item.name,item.chaosValue);
-      c+='<div class="icon-item '+t+'" title="'+item.name+' · '+fmt(item.chaosValue)+'">';
+      c+='<div class="icon-item '+t+'" title="'+item.name+' \xb7 '+fmt(item.chaosValue)+'">';
       c+=item.icon?'<img src="'+item.icon+'" alt="'+item.name+'" loading="lazy" onerror="this.style.display=\'none\'">':'<span class="icon-placeholder"></span>';
       c+='<span class="icon-price">'+fmt(item.chaosValue)+'</span></div>';
     }
     c+='</div></div>';
     cards.push(c);
   }
-  document.getElementById("output").innerHTML=cards.length?'<div class="bases-wrap">'+cards.join("")+'</div>':'<p style="text-align:center;color:#555;padding:16px;font-size:11px">No bases above '+minPrice+'c</p>';
+  document.getElementById("output").innerHTML=cards.length
+    ?'<div class="bases-wrap">'+cards.join('')+'</div>'
+    :'<p style="text-align:center;color:#555;padding:16px;font-size:11px">No bases above '+minPrice+'c</p>';
+  fitToViewport();
 }
+
 function buildIndex(items){
-  const byBase={};
-  for(const item of items){const b=item.baseType;if(!byBase[b])byBase[b]={};if(!byBase[b][item.name]||item.chaosValue>byBase[b][item.name].chaosValue)byBase[b][item.name]=item}
-  for(const b of Object.keys(byBase))byBase[b]=Object.values(byBase[b]).sort((a,z)=>z.chaosValue-a.chaosValue);
-  return byBase;
+  const m={};
+  for(const item of items){const b=item.baseType;if(!m[b])m[b]={};if(!m[b][item.name]||item.chaosValue>m[b][item.name].chaosValue)m[b][item.name]=item}
+  for(const b of Object.keys(m))m[b]=Object.values(m[b]).sort((a,z)=>z.chaosValue-a.chaosValue);
+  return m;
 }
+
 function reloadLeague(){
   const league=document.getElementById("leagueSelect").value;
   if(cachedData[league])render();
   else loadAll();
 }
+
 async function loadAll(){
   const btn=document.getElementById("refreshBtn");
   const status=document.getElementById("status");
@@ -145,13 +180,15 @@ async function loadAll(){
     const d=await r.json();
     cachedData={};
     for(const [league,items] of Object.entries(d.leagues||{}))cachedData[league]=buildIndex(items);
-    const updatedAt=new Date(d.updatedAt).toLocaleString();
     status.className="status";
-    status.textContent="Prices from "+updatedAt;
+    status.textContent="Prices from "+new Date(d.updatedAt).toLocaleString();
     render();
   }catch(e){status.className="status error";status.textContent="Error: "+e.message;}
   btn.disabled=false;
 }
+
+let _raf;
+window.addEventListener('resize',()=>{cancelAnimationFrame(_raf);_raf=requestAnimationFrame(fitToViewport);});
 loadAll();
 </script>
 </body>
