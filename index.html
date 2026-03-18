@@ -51,7 +51,7 @@ button:disabled{background:#444;cursor:not-allowed}
 </head>
 <body>
 <h1>&#x2697;&#xFE0F; PoE Multi-Base Unique Cheatsheet</h1>
-<p class="subtitle">Prices live from poe.ninja &middot; Always ID these bases!</p>
+<p class="subtitle">Prices from poe.ninja &middot; Updated every 30 min &middot; Always ID these bases!</p>
 <div class="controls">
   <label>League:</label>
   <select id="leagueSelect">
@@ -61,7 +61,7 @@ button:disabled{background:#444;cursor:not-allowed}
   </select>
   <button id="refreshBtn" onclick="loadAll()">&#x21BA; Refresh Prices</button>
 </div>
-<div class="status" id="status">Click Refresh Prices to load latest data.</div>
+<div class="status" id="status">Loading...</div>
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:#ff3232"></div>S (1000c+)</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ff8c00"></div>A (100-999c)</div>
@@ -85,7 +85,6 @@ const CRAFTED=new Set(["Khatal's Geyser","Mask of the Stitched Demon","Zerphi's 
 function tier(p){if(p>=1000)return"t-s";if(p>=100)return"t-a";if(p>=20)return"t-b";if(p>=5)return"t-c";if(p>=2)return"t-d";return"t-x"}
 function fmt(p){if(p>=1000)return(p/1000).toFixed(1)+"k";if(p>=10)return Math.round(p)+"c";return p.toFixed(1)+"c"}
 function itemTier(n,p){if(CRAFTED.has(n))return"t-special";if(BOSS_ONLY.has(n))return"t-boss";return tier(p)}
-async function fetchType(league,type){const target="https://poe.ninja/api/data/itemoverview?league="+encodeURIComponent(league)+"&type="+type;const url="https://api.allorigins.win/raw?url="+encodeURIComponent(target);const r=await fetch(url);if(!r.ok)throw new Error(type+" failed: "+r.status);const d=await r.json();return d.lines||[]}
 function renderCheatsheet(allItems){
   const byBase={};
   for(const item of allItems){const b=item.baseType;if(!byBase[b])byBase[b]={};if(!byBase[b][item.name]||item.chaosValue>byBase[b][item.name].chaosValue)byBase[b][item.name]=item}
@@ -113,14 +112,16 @@ async function loadAll(){
   const output=document.getElementById("output");
   btn.disabled=true;
   status.className="status loading";
-  status.textContent="Fetching prices from poe.ninja...";
+  status.textContent="Loading prices...";
   output.innerHTML="";
   try{
-    const types=["UniqueWeapon","UniqueArmour","UniqueAccessory","UniqueFlask","UniqueJewel"];
-    const results=await Promise.all(types.map(t=>fetchType(league,t)));
-    const allItems=results.flat();
+    const r=await fetch("data.json?_="+Date.now());
+    if(!r.ok)throw new Error("data.json not found ("+r.status+")");
+    const d=await r.json();
+    const allItems=d.leagues[league]||[];
+    const updatedAt=new Date(d.updatedAt).toLocaleString();
     status.className="status";
-    status.textContent="Loaded "+allItems.length+" items for "+league+" · Updated "+new Date().toLocaleTimeString();
+    status.textContent="Loaded "+allItems.length+" items for "+league+" · Prices from "+updatedAt;
     output.innerHTML=renderCheatsheet(allItems);
   }catch(e){status.className="status error";status.textContent="Error: "+e.message;}
   btn.disabled=false;
