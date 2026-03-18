@@ -6,59 +6,58 @@
 <title>PoE Multi-Base Unique Cheatsheet</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;padding:8px;min-width:320px}
-h1{text-align:center;color:#c8a96e;font-size:17px;margin-bottom:2px;text-shadow:0 0 16px rgba(200,169,110,0.4)}
-.subtitle{text-align:center;color:#666;font-size:10px;margin-bottom:6px}
-.controls{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
-.controls label{color:#aaa;font-size:12px}
-select{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:5px;padding:4px 8px;font-size:12px;cursor:pointer}
+body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;padding:6px}
+h1{text-align:center;color:#c8a96e;font-size:16px;margin-bottom:1px;text-shadow:0 0 14px rgba(200,169,110,0.35)}
+.subtitle{text-align:center;color:#555;font-size:10px;margin-bottom:5px}
+.controls{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:3px;flex-wrap:wrap}
+.controls label{color:#aaa;font-size:11px}
+select{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:4px;padding:3px 7px;font-size:11px;cursor:pointer}
 select:focus{outline:2px solid #c8a96e}
-.min-price-wrap{display:flex;align-items:center;gap:4px;font-size:12px;color:#aaa}
-input[type=number]{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:5px;padding:4px 6px;font-size:12px;width:52px;text-align:center}
+.min-price-wrap{display:flex;align-items:center;gap:3px;font-size:11px;color:#aaa}
+input[type=number]{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:4px;padding:3px 5px;font-size:11px;width:46px;text-align:center}
 input[type=number]:focus{outline:2px solid #c8a96e}
-button{background:#238636;color:#fff;border:none;border-radius:5px;padding:4px 12px;font-size:12px;cursor:pointer;font-weight:600;transition:background 0.2s}
+button{background:#238636;color:#fff;border:none;border-radius:4px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:600;transition:background 0.15s}
 button:hover{background:#2ea043}
-button:disabled{background:#444;cursor:not-allowed}
-.status{text-align:center;color:#666;font-size:10px;margin-bottom:5px;min-height:13px}
+button:disabled{background:#333;color:#666;cursor:not-allowed}
+.status{text-align:center;color:#555;font-size:10px;margin-bottom:4px;min-height:12px}
 .status.loading{color:#c8a96e}
 .status.error{color:#f85149}
-.legend{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:6px}
-.legend-item{display:flex;align-items:center;gap:3px;font-size:10px;color:#888}
-.legend-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.section{margin-bottom:6px}
-.section-header{padding:3px 8px;border-radius:4px 4px 0 0;display:flex;align-items:baseline;gap:8px}
-.section-header h2{font-size:11px;font-weight:700;color:#fff;letter-spacing:0.3px}
-.section-header p{font-size:10px;color:rgba(255,255,255,0.5)}
-.bases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:3px;background:#161b22;padding:3px;border-radius:0 0 4px 4px;border:1px solid #30363d;border-top:none}
-.base-card{background:#1c2128;border:1px solid #30363d;border-radius:4px;overflow:hidden}
-.base-header{display:flex;align-items:center;gap:4px;padding:3px 6px;background:#21262d;border-bottom:1px solid #30363d}
-.base-name{font-size:10px;font-weight:600;color:#c8a96e;flex:1;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.base-max{font-size:10px;font-weight:700;padding:1px 5px;border-radius:8px;white-space:nowrap;flex-shrink:0}
-.icons-row{display:flex;flex-wrap:wrap;gap:2px;padding:3px}
-.icon-item{display:flex;flex-direction:column;align-items:center;gap:1px;cursor:default;border-radius:3px;padding:2px;border:1px solid transparent;position:relative}
-.icon-item:hover{background:rgba(255,255,255,0.07);border-color:#444}
-.icon-item img{width:44px;height:44px;object-fit:contain;display:block}
-.icon-placeholder{width:44px;height:44px;display:block}
-.icon-price{font-size:10px;font-weight:700;line-height:1;text-align:center}
-.no-data{color:#444;font-size:10px;padding:4px 6px;font-style:italic}
-.t-s.base-max{background:#ff3232;color:#fff}
-.t-a.base-max{background:#ff8c00;color:#fff}
-.t-b.base-max{background:#c89f00;color:#fff}
-.t-c.base-max{background:#2a7a2a;color:#fff}
-.t-d.base-max{background:#2a4a6a;color:#fff}
-.t-x.base-max{background:#2a2a2a;color:#666}
-.t-boss.base-max{background:#005a64;color:#fff}
-.t-special.base-max{background:#5a0080;color:#fff}
-.t-s .icon-price{color:#ff6666}
-.t-a .icon-price{color:#ff8c00}
-.t-b .icon-price{color:#ffd700}
-.t-c .icon-price{color:#50c850}
-.t-d .icon-price{color:#6496c8}
+.legend{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:5px}
+.legend-item{display:flex;align-items:center;gap:2px;font-size:9px;color:#666}
+.legend-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+/* ── main layout ── */
+.bases-wrap{display:flex;flex-wrap:wrap;gap:3px;align-items:flex-start}
+.base-card{display:flex;align-items:stretch;background:#181e25;border:1px solid #2d333b;border-radius:4px;overflow:hidden;cursor:default}
+.base-card:hover{border-color:#444c56;background:#1c2330}
+.base-label{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:4px 7px 4px 6px;min-width:0;border-right:1px solid #2d333b}
+.base-name{font-size:10px;font-weight:700;color:#c8a96e;white-space:nowrap;line-height:1.1}
+.base-max{font-size:9px;font-weight:700;padding:1px 4px;border-radius:6px;white-space:nowrap;line-height:1.3;align-self:flex-start}
+.icons-row{display:flex;gap:1px;align-items:center;padding:3px 4px}
+.icon-item{display:flex;flex-direction:column;align-items:center;gap:1px;border-radius:3px;padding:2px 3px;border:1px solid transparent;transition:background 0.1s}
+.icon-item:hover{background:rgba(255,255,255,0.07);border-color:#3d444d}
+.icon-item img{width:42px;height:42px;object-fit:contain;display:block}
+.icon-placeholder{width:42px;height:42px;display:block}
+.icon-price{font-size:9px;font-weight:700;line-height:1;text-align:center;white-space:nowrap}
+/* tier — badge */
+.t-s.base-max{background:#b01010;color:#fff}
+.t-a.base-max{background:#c06800;color:#fff}
+.t-b.base-max{background:#907000;color:#fff}
+.t-c.base-max{background:#1e6020;color:#fff}
+.t-d.base-max{background:#1e3a5a;color:#ccc}
+.t-x.base-max{background:#222;color:#555}
+.t-boss.base-max{background:#004a52;color:#7ee}
+.t-special.base-max{background:#420060;color:#d8a}
+/* tier — price label */
+.t-s .icon-price{color:#ff6060}
+.t-a .icon-price{color:#ffa040}
+.t-b .icon-price{color:#e8cc00}
+.t-c .icon-price{color:#48c848}
+.t-d .icon-price{color:#5080c0}
 .t-x .icon-price{color:#444}
-.t-boss .icon-price{color:#00c8dc}
-.t-special .icon-price{color:#b400ff}
-.footer{text-align:center;color:#444;font-size:10px;margin-top:8px;padding-top:6px;border-top:1px solid #1a1f27}
-.footer a{color:#4a7aaa;text-decoration:none}
+.t-boss .icon-price{color:#00b8cc}
+.t-special .icon-price{color:#b060e0}
+.footer{text-align:center;color:#3a3a3a;font-size:9px;margin-top:6px;padding-top:5px;border-top:1px solid #181e25}
+.footer a{color:#3a5a80;text-decoration:none}
 </style>
 </head>
 <body>
@@ -66,7 +65,7 @@ button:disabled{background:#444;cursor:not-allowed}
 <p class="subtitle">Prices from poe.ninja &middot; Updated every 30 min &middot; Always ID these bases!</p>
 <div class="controls">
   <label>League:</label>
-  <select id="leagueSelect" onchange="render()">
+  <select id="leagueSelect" onchange="reloadLeague()">
     <option value="Mirage">Mirage</option>
     <option value="Mercenaries">Mercenaries</option>
     <option value="Standard">Standard</option>
@@ -74,7 +73,7 @@ button:disabled{background:#444;cursor:not-allowed}
   </select>
   <div class="min-price-wrap">
     <label>Min:</label>
-    <input type="number" id="minPrice" value="5" min="0" step="1" onchange="render()">
+    <input type="number" id="minPrice" value="5" min="0" step="1" oninput="render()">
     <span>c</span>
   </div>
   <button id="refreshBtn" onclick="loadAll()">&#x21BA; Refresh</button>
@@ -92,45 +91,49 @@ button:disabled{background:#444;cursor:not-allowed}
 <div id="output"></div>
 <div class="footer">
   Data from <a href="https://poe.ninja" target="_blank">poe.ninja</a> &middot;
-  <a href="https://github.com/sheldon/poe-multibase-cheatsheet" target="_blank">GitHub</a>
+  <a href="https://github.com/sheldonels/poe-multibase-cheatsheet" target="_blank">GitHub</a>
 </div>
 <script>
-const SECTIONS=[{id:"top",title:"&#11088;&#11088; TOP MULTI-BASES",subtitle:"VERY small chance to be VERY expensive",headerColor:"linear-gradient(135deg,#7c3010,#c85a20)",bases:[{name:"Amethyst Flask"},{name:"Antique Gauntlets"},{name:"Assassin's Boots"},{name:"Foul Staff"},{name:"Heavy Belt"},{name:"Hellion's Paw"},{name:"Imperial Bow"},{name:"Imperial Skean"},{name:"Imperial Staff"},{name:"Leather Belt"},{name:"Magistrate Crown"},{name:"Paua Amulet"},{name:"Small Cluster Jewel"},{name:"Steel Ring"},{name:"Vaal Claw"},{name:"Waxed Garb"}]},{id:"multi",title:"&#11088; MULTI-BASES",subtitle:"Small chance to be expensive &mdash; always check!",headerColor:"linear-gradient(135deg,#1a3a6e,#2d5fa8)",bases:[{name:"Crude Bow"},{name:"Crusader Plate"},{name:"Ebony Tower Shield"},{name:"Fiend Dagger"},{name:"Gold Ring"},{name:"Highborn Staff"},{name:"Hydrascale Gauntlets"},{name:"Lapis Amulet"},{name:"Moonstone Ring"},{name:"Onyx Amulet"},{name:"Prophet Crown"},{name:"Sage's Robe"},{name:"Saint's Hauberk"},{name:"Spidersilk Robe"},{name:"Spine Bow"},{name:"Stealth Boots"},{name:"Studded Belt"},{name:"Turquoise Amulet"},{name:"Vaal Blade"}]}];
+const ALL_BASES=["Amethyst Flask","Antique Gauntlets","Assassin's Boots","Crude Bow","Crusader Plate","Ebony Tower Shield","Fiend Dagger","Foul Staff","Gold Ring","Heavy Belt","Hellion's Paw","Highborn Staff","Hydrascale Gauntlets","Imperial Bow","Imperial Skean","Imperial Staff","Lapis Amulet","Leather Belt","Magistrate Crown","Moonstone Ring","Onyx Amulet","Paua Amulet","Prophet Crown","Sage's Robe","Saint's Hauberk","Small Cluster Jewel","Spidersilk Robe","Spine Bow","Steel Ring","Stealth Boots","Studded Belt","Turquoise Amulet","Vaal Blade","Vaal Claw","Waxed Garb"];
 const BOSS_ONLY=new Set(["Progenesis","Admiral's Arrogance","The Stampede","The Winds of Fate","Mageblood","Law of the Wilds","Wing of the Wyvern","Woespike","Mask of the Stitched Demon","Zerphi's Heart","The Siege","Breathstealer","Sporeguard","Crown of the Tyrant","Mask of the Tribunal","Ashes of the Stars","Stranglegasp","Yoke of Suffering","Crown of the Inward Eye","Hyperboreus","Screams of the Desiccated","Cyclopean Coil","Farrul's Pounce","Witchhunter's Judgment","Mask of the Spirit Drinker","Sacrificial Heart","The Front Line","Betrayal's Sting","Mark of the Elder","Fenumus' Spinnerets","Bloodseeker","Khatal's Weeping","Choir of the Storm","Aul's Uprising","The Eternal Struggle","Crystallised Omniscience","Solstice Vigil","Presence of Chayula","Haunting Memories","The Broken Elegy","Ynda's Stand","Bear's Girdle"]);
 const CRAFTED=new Set(["Khatal's Geyser","Mask of the Stitched Demon","Zerphi's Heart","Ynda's Stand","The Winds of Fate"]);
 function tier(p){if(p>=1000)return"t-s";if(p>=100)return"t-a";if(p>=20)return"t-b";if(p>=5)return"t-c";if(p>=2)return"t-d";return"t-x"}
 function fmt(p){if(p>=1000)return(p/1000).toFixed(1)+"k";if(p>=10)return Math.round(p)+"c";return p.toFixed(1)+"c"}
 function itemTier(n,p){if(CRAFTED.has(n))return"t-special";if(BOSS_ONLY.has(n))return"t-boss";return tier(p)}
-let cachedByBase={};
+let cachedData={};
 function render(){
   const minPrice=Math.max(0,Number(document.getElementById("minPrice").value)||0);
-  let html="";
-  for(const section of SECTIONS){
-    const cards=[];
-    for(const base of section.bases){
-      const items=(cachedByBase[base.name]||[]).filter(i=>i.chaosValue>=minPrice);
-      if(!items.length)continue;
-      const maxPrice=items[0].chaosValue;
-      const maxT=itemTier(items[0].name,maxPrice);
-      let card='<div class="base-card"><div class="base-header"><div class="base-name">'+base.name+'</div><div class="base-max '+maxT+'">'+fmt(maxPrice)+'</div></div><div class="icons-row">';
-      for(const item of items){
-        const t=itemTier(item.name,item.chaosValue);
-        const icon=item.icon||"";
-        const label=item.name+" &middot; "+fmt(item.chaosValue);
-        card+='<div class="icon-item '+t+'" title="'+item.name+' · '+fmt(item.chaosValue)+'">';
-        card+=icon?'<img src="'+icon+'" alt="'+item.name+'" loading="lazy" onerror="this.style.display=\'none\'">':'<span class="icon-placeholder"></span>';
-        card+='<span class="icon-price">'+fmt(item.chaosValue)+'</span></div>';
-      }
-      card+="</div></div>";
-      cards.push(card);
+  const league=document.getElementById("leagueSelect").value;
+  const byBase=cachedData[league]||{};
+  const cards=[];
+  for(const baseName of ALL_BASES){
+    const items=(byBase[baseName]||[]).filter(i=>i.chaosValue>=minPrice);
+    if(!items.length)continue;
+    const maxT=itemTier(items[0].name,items[0].chaosValue);
+    let c='<div class="base-card"><div class="base-label"><span class="base-name">'+baseName+'</span><span class="base-max '+maxT+'">'+fmt(items[0].chaosValue)+'</span></div><div class="icons-row">';
+    for(const item of items){
+      const t=itemTier(item.name,item.chaosValue);
+      c+='<div class="icon-item '+t+'" title="'+item.name+' · '+fmt(item.chaosValue)+'">';
+      c+=item.icon?'<img src="'+item.icon+'" alt="'+item.name+'" loading="lazy" onerror="this.style.display=\'none\'">':'<span class="icon-placeholder"></span>';
+      c+='<span class="icon-price">'+fmt(item.chaosValue)+'</span></div>';
     }
-    if(!cards.length)continue;
-    html+='<div class="section"><div class="section-header" style="background:'+section.headerColor+'"><h2>'+section.title+'</h2><p>'+section.subtitle+'</p></div><div class="bases-grid">'+cards.join("")+"</div></div>";
+    c+='</div></div>';
+    cards.push(c);
   }
-  document.getElementById("output").innerHTML=html||'<p style="text-align:center;color:#555;padding:20px">No items above '+minPrice+'c</p>';
+  document.getElementById("output").innerHTML=cards.length?'<div class="bases-wrap">'+cards.join("")+'</div>':'<p style="text-align:center;color:#555;padding:16px;font-size:11px">No bases above '+minPrice+'c</p>';
+}
+function buildIndex(items){
+  const byBase={};
+  for(const item of items){const b=item.baseType;if(!byBase[b])byBase[b]={};if(!byBase[b][item.name]||item.chaosValue>byBase[b][item.name].chaosValue)byBase[b][item.name]=item}
+  for(const b of Object.keys(byBase))byBase[b]=Object.values(byBase[b]).sort((a,z)=>z.chaosValue-a.chaosValue);
+  return byBase;
+}
+function reloadLeague(){
+  const league=document.getElementById("leagueSelect").value;
+  if(cachedData[league])render();
+  else loadAll();
 }
 async function loadAll(){
-  const league=document.getElementById("leagueSelect").value;
   const btn=document.getElementById("refreshBtn");
   const status=document.getElementById("status");
   btn.disabled=true;
@@ -138,15 +141,13 @@ async function loadAll(){
   status.textContent="Loading prices...";
   try{
     const r=await fetch("data.json?_="+Date.now());
-    if(!r.ok)throw new Error("data.json not found ("+r.status+")");
+    if(!r.ok)throw new Error("HTTP "+r.status);
     const d=await r.json();
-    const allItems=d.leagues[league]||[];
-    cachedByBase={};
-    for(const item of allItems){const b=item.baseType;if(!cachedByBase[b])cachedByBase[b]={};if(!cachedByBase[b][item.name]||item.chaosValue>cachedByBase[b][item.name].chaosValue)cachedByBase[b][item.name]=item}
-    for(const b of Object.keys(cachedByBase))cachedByBase[b]=Object.values(cachedByBase[b]).sort((a,b2)=>b2.chaosValue-a.chaosValue);
+    cachedData={};
+    for(const [league,items] of Object.entries(d.leagues||{}))cachedData[league]=buildIndex(items);
     const updatedAt=new Date(d.updatedAt).toLocaleString();
     status.className="status";
-    status.textContent=allItems.length+" items &middot; "+league+" &middot; Prices from "+updatedAt;
+    status.textContent="Prices from "+updatedAt;
     render();
   }catch(e){status.className="status error";status.textContent="Error: "+e.message;}
   btn.disabled=false;
