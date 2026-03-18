@@ -47,17 +47,17 @@ body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;pa
 #bar a:hover{color:#6496c8}
 .bsep{color:#2a2a2a;padding:0 1px}
 .btitle{color:#6a7a5a;font-weight:600;letter-spacing:.2px}
-.ldot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;cursor:default;vertical-align:middle}
+.litem{display:inline-flex;align-items:center;gap:2px;color:#555}
+.ldot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 #bar label{color:#6a6a6a}
 #bar select,#bar input[type=number]{background:#161b22;color:#bbb;border:1px solid #2a3040;border-radius:3px;padding:1px 4px;font-size:10px;cursor:pointer;vertical-align:middle}
 #bar input[type=number]{width:34px;text-align:center}
 #bar select:focus,#bar input[type=number]:focus{outline:1px solid #c8a96e}
-#bar button{background:#182818;color:#888;border:1px solid #253525;border-radius:3px;padding:1px 7px;font-size:10px;cursor:pointer;vertical-align:middle}
-#bar button:hover{background:#1e3a1e;color:#ccc}
-#bar button:disabled{background:#111;color:#333;cursor:not-allowed}
 #status{color:#555;font-style:italic}
 #status.loading{color:#c8a96e;font-style:normal}
 #status.error{color:#f85149;font-style:normal}
+/* icon links */
+a.icon-item{text-decoration:none;color:inherit}
 </style>
 </head>
 <body>
@@ -65,13 +65,13 @@ body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;pa
 <div id="bar">
   <span class="btitle">&#x2697;&#xFE0F; PoE Multibase</span>
   <span class="bsep">·</span>
-  <span class="ldot" style="background:#c03030" title="S: 1000c+"></span>
-  <span class="ldot" style="background:#c07000" title="A: 100c+"></span>
-  <span class="ldot" style="background:#b09000" title="B: 20c+"></span>
-  <span class="ldot" style="background:#308030" title="C: 5c+"></span>
-  <span class="ldot" style="background:#3060a0" title="D: 2c+"></span>
-  <span class="ldot" style="background:#008090" title="Boss drop"></span>
-  <span class="ldot" style="background:#7000a0" title="Crafted/Special"></span>
+  <span class="litem"><span class="ldot" style="background:#c03030"></span>1k+</span>
+  <span class="litem"><span class="ldot" style="background:#c07000"></span>100c</span>
+  <span class="litem"><span class="ldot" style="background:#b09000"></span>20c</span>
+  <span class="litem"><span class="ldot" style="background:#308030"></span>5c</span>
+  <span class="litem"><span class="ldot" style="background:#3060a0"></span>2c</span>
+  <span class="litem"><span class="ldot" style="background:#008090"></span>boss</span>
+  <span class="litem"><span class="ldot" style="background:#7000a0"></span>spec</span>
   <span class="bsep">·</span>
   <label>League</label>
   <select id="leagueSelect" onchange="reloadLeague()">
@@ -82,7 +82,6 @@ body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;pa
   </select>
   <label>Min</label>
   <input type="number" id="minPrice" value="5" min="0" step="1" oninput="render()"><span style="color:#555">c</span>
-  <button id="refreshBtn" onclick="loadAll()">&#x21BA;</button>
   <span class="bsep">·</span>
   <a href="https://poe.ninja" target="_blank">poe.ninja</a>
   <span class="bsep">·</span>
@@ -124,6 +123,7 @@ function fitToViewport(){
 function render(){
   const minPrice=Math.max(0,Number(document.getElementById("minPrice").value)||0);
   const league=document.getElementById("leagueSelect").value;
+  const leagueSlug=league.toLowerCase().replace(/ /g,'-');
   const byBase=cachedData[league]||{};
   const cards=[];
   for(const baseName of ALL_BASES){
@@ -133,9 +133,10 @@ function render(){
     let c='<div class="base-card"><div class="base-label"><span class="base-name">'+baseName+'</span><span class="base-max '+maxT+'">'+fmt(items[0].chaosValue)+'</span></div><div class="icons-row">';
     for(const item of items){
       const t=itemTier(item.name,item.chaosValue);
-      c+='<div class="icon-item '+t+'" title="'+item.name+' \xb7 '+fmt(item.chaosValue)+'">';
+      const url='https://poe.ninja/economy/'+leagueSlug+'/'+(item.cat||'unique-accessories')+'?name='+encodeURIComponent(item.name);
+      c+='<a class="icon-item '+t+'" href="'+url+'" target="_blank" rel="noopener" title="'+item.name+' \xb7 '+fmt(item.chaosValue)+'">';
       c+=item.icon?'<img src="'+item.icon+'" alt="'+item.name+'" loading="lazy" onerror="this.style.display=\'none\'">':'<span class="icon-placeholder"></span>';
-      c+='<span class="icon-price">'+fmt(item.chaosValue)+'</span></div>';
+      c+='<span class="icon-price">'+fmt(item.chaosValue)+'</span></a>';
     }
     c+='</div></div>';
     cards.push(c);
@@ -160,9 +161,7 @@ function reloadLeague(){
 }
 
 async function loadAll(){
-  const btn=document.getElementById("refreshBtn");
   const status=document.getElementById("status");
-  btn.disabled=true;
   status.className="loading";
   status.textContent="Loading...";
   try{
@@ -175,7 +174,6 @@ async function loadAll(){
     status.textContent="updated "+new Date(d.updatedAt).toLocaleTimeString();
     render();
   }catch(e){status.className="error";status.textContent=e.message;}
-  btn.disabled=false;
 }
 
 let _raf;

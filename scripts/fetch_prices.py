@@ -12,12 +12,21 @@ def fetch(league, type_):
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read()).get("lines", [])
 
-def trim(item):
+TYPE_SLUGS = {
+    "UniqueWeapon": "unique-weapons",
+    "UniqueArmour": "unique-armour",
+    "UniqueAccessory": "unique-accessories",
+    "UniqueFlask": "unique-flasks",
+    "UniqueJewel": "unique-jewels",
+}
+
+def trim(item, type_):
     return {
         "name": item.get("name", ""),
         "chaosValue": item.get("chaosValue", 0),
         "baseType": item.get("baseType", ""),
         "icon": item.get("icon", ""),
+        "cat": TYPE_SLUGS.get(type_, ""),
     }
 
 data = {}
@@ -25,7 +34,7 @@ for league in LEAGUES:
     lines = []
     for type_ in TYPES:
         print(f"Fetching {league} / {type_}...")
-        lines.extend(trim(i) for i in fetch(league, type_))
+        lines.extend(trim(i, type_) for i in fetch(league, type_))
     data[league] = lines
     print(f"  {len(lines)} items")
 
