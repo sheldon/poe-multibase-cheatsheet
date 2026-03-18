@@ -85,7 +85,7 @@ const CRAFTED=new Set(["Khatal's Geyser","Mask of the Stitched Demon","Zerphi's 
 function tier(p){if(p>=1000)return"t-s";if(p>=100)return"t-a";if(p>=20)return"t-b";if(p>=5)return"t-c";if(p>=2)return"t-d";return"t-x"}
 function fmt(p){if(p>=1000)return(p/1000).toFixed(1)+"k";if(p>=10)return Math.round(p)+"c";return p.toFixed(1)+"c"}
 function itemTier(n,p){if(CRAFTED.has(n))return"t-special";if(BOSS_ONLY.has(n))return"t-boss";return tier(p)}
-async function fetchType(league,type){const target="https://poe.ninja/api/data/itemoverview?league="+encodeURIComponent(league)+"&type="+type;const url="https://corsproxy.io/?url="+encodeURIComponent(target);const r=await fetch(url);if(!r.ok)throw new Error(type+" failed: "+r.status);const d=await r.json();return d.lines||[]}
+async function fetchType(league,type){const target="https://poe.ninja/api/data/itemoverview?league="+encodeURIComponent(league)+"&type="+type;const url="https://api.allorigins.win/raw?url="+encodeURIComponent(target);const r=await fetch(url);if(!r.ok)throw new Error(type+" failed: "+r.status);const d=await r.json();return d.lines||[]}
 function renderCheatsheet(allItems){
   const byBase={};
   for(const item of allItems){const b=item.baseType;if(!byBase[b])byBase[b]={};if(!byBase[b][item.name]||item.chaosValue>byBase[b][item.name].chaosValue)byBase[b][item.name]=item}
