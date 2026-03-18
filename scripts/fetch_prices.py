@@ -3,7 +3,7 @@ import urllib.request
 import urllib.parse
 from datetime import datetime, timezone
 
-LEAGUES = ["Mercenaries", "Standard", "Hardcore Mercenaries"]
+LEAGUES = ["Mirage", "Mercenaries", "Standard", "Hardcore Mercenaries"]
 TYPES = ["UniqueWeapon", "UniqueArmour", "UniqueAccessory", "UniqueFlask", "UniqueJewel"]
 
 def fetch(league, type_):
