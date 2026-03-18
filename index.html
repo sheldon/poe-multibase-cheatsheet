@@ -198,8 +198,13 @@ async function loadAll(){
   }catch(e){status.className="error";status.textContent=e.message;}
 }
 
-let _raf;
-window.addEventListener('resize',()=>{cancelAnimationFrame(_raf);_raf=requestAnimationFrame(fitToViewport);});
+let _raf, _lastW=0;
+window.addEventListener('resize',()=>{
+  if(window.innerWidth===_lastW)return;// height-only (mobile address bar) — ignore
+  _lastW=window.innerWidth;
+  cancelAnimationFrame(_raf);
+  _raf=requestAnimationFrame(fitToViewport);
+});
 loadAll();
 </script>
 </body>
