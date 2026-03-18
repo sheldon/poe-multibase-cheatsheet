@@ -8,34 +8,16 @@
 :root{--is:42px;--pf:9px;--nf:10px;--bf:9px;--gap:3px}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
-body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;padding:5px;display:flex;flex-direction:column;gap:3px}
-h1{text-align:center;color:#c8a96e;font-size:15px;line-height:1;text-shadow:0 0 12px rgba(200,169,110,0.3)}
-.subtitle{text-align:center;color:#555;font-size:9px}
-.controls{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}
-.controls label{color:#aaa;font-size:11px}
-select{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:4px;padding:2px 6px;font-size:11px;cursor:pointer}
-select:focus{outline:2px solid #c8a96e}
-.min-price-wrap{display:flex;align-items:center;gap:3px;font-size:11px;color:#aaa}
-input[type=number]{background:#21262d;color:#e6e6e6;border:1px solid #30363d;border-radius:4px;padding:2px 5px;font-size:11px;width:44px;text-align:center}
-input[type=number]:focus{outline:2px solid #c8a96e}
-button{background:#238636;color:#fff;border:none;border-radius:4px;padding:2px 9px;font-size:11px;cursor:pointer;font-weight:600}
-button:hover{background:#2ea043}
-button:disabled{background:#333;color:#555;cursor:not-allowed}
-.status{text-align:center;color:#555;font-size:9px;line-height:1}
-.status.loading{color:#c8a96e}
-.status.error{color:#f85149}
-.legend{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
-.legend-item{display:flex;align-items:center;gap:2px;font-size:9px;color:#666}
-.legend-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;padding:4px 4px 0;display:flex;flex-direction:column;gap:3px}
 /* ── card area ── */
 #output{flex:1;overflow:hidden;min-height:0}
 .bases-wrap{display:flex;flex-wrap:wrap;gap:var(--gap);align-content:flex-start;align-items:flex-start}
 .base-card{display:flex;align-items:stretch;background:#181e25;border:1px solid #2d333b;border-radius:4px;overflow:hidden}
 .base-card:hover{border-color:#444c56;background:#1c2330}
-.base-label{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:3px 5px 3px 5px;border-right:1px solid #2d333b;min-width:0}
+.base-label{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:3px 5px;border-right:1px solid #2d333b;min-width:0}
 .base-name{font-size:var(--nf);font-weight:700;color:#c8a96e;white-space:nowrap;line-height:1.1}
 .base-max{font-size:var(--bf);font-weight:700;padding:1px 4px;border-radius:5px;white-space:nowrap;line-height:1.3;align-self:flex-start}
-.icons-row{display:flex;flex-wrap:nowrap;gap:1px;align-items:center;padding:3px 3px}
+.icons-row{display:flex;flex-wrap:nowrap;gap:1px;align-items:center;padding:3px}
 .icon-item{display:flex;flex-direction:column;align-items:center;gap:1px;border-radius:3px;padding:2px;border:1px solid transparent;flex-shrink:0}
 .icon-item:hover{background:rgba(255,255,255,0.07);border-color:#3d444d}
 .icon-item img{width:var(--is);height:var(--is);object-fit:contain;display:block}
@@ -59,44 +41,54 @@ button:disabled{background:#333;color:#555;cursor:not-allowed}
 .t-x .icon-price{color:#444}
 .t-boss .icon-price{color:#00b0c4}
 .t-special .icon-price{color:#a050d8}
-.footer{text-align:center;color:#333;font-size:9px;padding-top:2px;border-top:1px solid #151b22;flex-shrink:0}
-.footer a{color:#385070;text-decoration:none}
+/* ── footer bar ── */
+#bar{display:flex;align-items:center;flex-wrap:wrap;gap:3px 6px;padding:3px 4px;border-top:1px solid #1c2128;flex-shrink:0;font-size:10px;color:#555;line-height:1}
+#bar a{color:#3a5070;text-decoration:none}
+#bar a:hover{color:#6496c8}
+.bsep{color:#2a2a2a;padding:0 1px}
+.btitle{color:#6a7a5a;font-weight:600;letter-spacing:.2px}
+.ldot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;cursor:default;vertical-align:middle}
+#bar label{color:#6a6a6a}
+#bar select,#bar input[type=number]{background:#161b22;color:#bbb;border:1px solid #2a3040;border-radius:3px;padding:1px 4px;font-size:10px;cursor:pointer;vertical-align:middle}
+#bar input[type=number]{width:34px;text-align:center}
+#bar select:focus,#bar input[type=number]:focus{outline:1px solid #c8a96e}
+#bar button{background:#182818;color:#888;border:1px solid #253525;border-radius:3px;padding:1px 7px;font-size:10px;cursor:pointer;vertical-align:middle}
+#bar button:hover{background:#1e3a1e;color:#ccc}
+#bar button:disabled{background:#111;color:#333;cursor:not-allowed}
+#status{color:#555;font-style:italic}
+#status.loading{color:#c8a96e;font-style:normal}
+#status.error{color:#f85149;font-style:normal}
 </style>
 </head>
 <body>
-<div id="top">
-  <h1>&#x2697;&#xFE0F; PoE Multi-Base Unique Cheatsheet</h1>
-  <p class="subtitle">poe.ninja prices &middot; updated every 30 min &middot; always ID these bases!</p>
-  <div class="controls">
-    <label>League:</label>
-    <select id="leagueSelect" onchange="reloadLeague()">
-      <option value="Mirage">Mirage</option>
-      <option value="Mercenaries">Mercenaries</option>
-      <option value="Standard">Standard</option>
-      <option value="Hardcore Mercenaries">HC Mercenaries</option>
-    </select>
-    <div class="min-price-wrap">
-      <label>Min:</label>
-      <input type="number" id="minPrice" value="5" min="0" step="1" oninput="render()">
-      <span>c</span>
-    </div>
-    <button id="refreshBtn" onclick="loadAll()">&#x21BA; Refresh</button>
-  </div>
-  <div class="status" id="status">Loading...</div>
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#ff3232"></div>S 1k+</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ff8c00"></div>A 100+</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ffd700"></div>B 20+</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#50c850"></div>C 5+</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#6496c8"></div>D 2+</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#00c8dc"></div>Boss</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#b400ff"></div>Special</div>
-  </div>
-</div>
 <div id="output"></div>
-<div class="footer">
-  <a href="https://poe.ninja" target="_blank">poe.ninja</a> &middot;
+<div id="bar">
+  <span class="btitle">&#x2697;&#xFE0F; PoE Multibase</span>
+  <span class="bsep">·</span>
+  <span class="ldot" style="background:#c03030" title="S: 1000c+"></span>
+  <span class="ldot" style="background:#c07000" title="A: 100c+"></span>
+  <span class="ldot" style="background:#b09000" title="B: 20c+"></span>
+  <span class="ldot" style="background:#308030" title="C: 5c+"></span>
+  <span class="ldot" style="background:#3060a0" title="D: 2c+"></span>
+  <span class="ldot" style="background:#008090" title="Boss drop"></span>
+  <span class="ldot" style="background:#7000a0" title="Crafted/Special"></span>
+  <span class="bsep">·</span>
+  <label>League</label>
+  <select id="leagueSelect" onchange="reloadLeague()">
+    <option value="Mirage">Mirage</option>
+    <option value="Mercenaries">Mercenaries</option>
+    <option value="Standard">Standard</option>
+    <option value="Hardcore Mercenaries">HC Merc</option>
+  </select>
+  <label>Min</label>
+  <input type="number" id="minPrice" value="5" min="0" step="1" oninput="render()"><span style="color:#555">c</span>
+  <button id="refreshBtn" onclick="loadAll()">&#x21BA;</button>
+  <span class="bsep">·</span>
+  <a href="https://poe.ninja" target="_blank">poe.ninja</a>
+  <span class="bsep">·</span>
   <a href="https://github.com/sheldonels/poe-multibase-cheatsheet" target="_blank">GitHub</a>
+  <span class="bsep">·</span>
+  <span id="status" class="loading">Loading...</span>
 </div>
 <script>
 const ALL_BASES=["Amethyst Flask","Antique Gauntlets","Assassin's Boots","Crude Bow","Crusader Plate","Ebony Tower Shield","Fiend Dagger","Foul Staff","Gold Ring","Heavy Belt","Hellion's Paw","Highborn Staff","Hydrascale Gauntlets","Imperial Bow","Imperial Skean","Imperial Staff","Lapis Amulet","Leather Belt","Magistrate Crown","Moonstone Ring","Onyx Amulet","Paua Amulet","Prophet Crown","Sage's Robe","Saint's Hauberk","Small Cluster Jewel","Spidersilk Robe","Spine Bow","Steel Ring","Stealth Boots","Studded Belt","Turquoise Amulet","Vaal Blade","Vaal Claw","Waxed Garb"];
@@ -119,8 +111,7 @@ function applySize(s){
 function fitToViewport(){
   const out=document.getElementById('output');
   if(!out.firstChild)return;
-  // binary search: largest icon size that fits without overflow
-  let lo=14,hi=54,best=lo;
+  let lo=14,hi=60,best=lo;
   while(lo<=hi){
     const mid=(lo+hi)>>1;
     applySize(mid);
@@ -172,18 +163,18 @@ async function loadAll(){
   const btn=document.getElementById("refreshBtn");
   const status=document.getElementById("status");
   btn.disabled=true;
-  status.className="status loading";
-  status.textContent="Loading prices...";
+  status.className="loading";
+  status.textContent="Loading...";
   try{
     const r=await fetch("data.json?_="+Date.now());
     if(!r.ok)throw new Error("HTTP "+r.status);
     const d=await r.json();
     cachedData={};
     for(const [league,items] of Object.entries(d.leagues||{}))cachedData[league]=buildIndex(items);
-    status.className="status";
-    status.textContent="Prices from "+new Date(d.updatedAt).toLocaleString();
+    status.className="";
+    status.textContent="updated "+new Date(d.updatedAt).toLocaleTimeString();
     render();
-  }catch(e){status.className="status error";status.textContent="Error: "+e.message;}
+  }catch(e){status.className="error";status.textContent=e.message;}
   btn.disabled=false;
 }
 
