@@ -89,7 +89,7 @@ body.phone .icons-row{flex-wrap:wrap}
     <option value="Hardcore Mercenaries">HC Merc</option>
   </select>
   <label>Min</label>
-  <input type="number" id="minPrice" value="5" min="0" step="1" oninput="render()"><span style="color:#555">c</span>
+  <input type="number" id="minPrice" value="5" min="0" step="1" oninput="saveMin();render()"><span style="color:#555">c</span>
   <span class="bsep">·</span>
   <a href="https://poe.ninja" target="_blank">poe.ninja</a>
   <span class="bsep">·</span>
@@ -105,6 +105,8 @@ function tier(p){if(p>=1000)return"t-s";if(p>=100)return"t-a";if(p>=20)return"t-
 function fmt(p){if(p>=1000)return(p/1000).toFixed(1)+"k";if(p>=10)return Math.round(p)+"c";return p.toFixed(1)+"c"}
 function itemTier(n,p){if(CRAFTED.has(n))return"t-special";if(BOSS_ONLY.has(n))return"t-boss";return tier(p)}
 let cachedData={};
+function saveMin(){try{localStorage.setItem('minPrice',document.getElementById('minPrice').value);}catch(e){}}
+(function(){try{const v=localStorage.getItem('minPrice');if(v!==null)document.getElementById('minPrice').value=v;}catch(e){}})();
 
 function applySize(s){
   const r=document.documentElement.style;
