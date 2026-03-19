@@ -53,6 +53,9 @@ body{background:#0d1117;color:#e6e6e6;font-family:'Segoe UI',Arial,sans-serif;pa
 #bar select,#bar input[type=number]{background:#161b22;color:#bbb;border:1px solid #2a3040;border-radius:3px;padding:1px 4px;font-size:10px;cursor:pointer;vertical-align:middle}
 #bar input[type=number]{width:34px;text-align:center}
 #bar select:focus,#bar input[type=number]:focus{outline:1px solid #c8a96e}
+#modeBtn{background:#182818;color:#aaa;border:1px solid #253525;border-radius:3px;padding:1px 6px;font-size:10px;cursor:pointer;vertical-align:middle;white-space:nowrap}
+#modeBtn:hover{background:#1e3a1e;color:#fff}
+#modeBtn.under{background:#2a1818;color:#ff8060;border-color:#4a2520}
 #status{color:#555;font-style:italic}
 #status.loading{color:#c8a96e;font-style:normal}
 #status.error{color:#f85149;font-style:normal}
@@ -90,6 +93,7 @@ body.phone .icons-row{flex-wrap:wrap}
   </select>
   <label>Min</label>
   <input type="number" id="minPrice" value="5" min="0" step="1" oninput="saveMin();render()"><span style="color:#555">c</span>
+  <button id="modeBtn" onclick="toggleMode()" title="Toggle above/below threshold"></button>
   <span class="bsep">·</span>
   <a href="https://poe.ninja" target="_blank">poe.ninja</a>
   <span class="bsep">·</span>
@@ -105,8 +109,16 @@ function tier(p){if(p>=1000)return"t-s";if(p>=100)return"t-a";if(p>=20)return"t-
 function fmt(p){if(p>=1000)return(p/1000).toFixed(1)+"k";if(p>=10)return Math.round(p)+"c";return p.toFixed(1)+"c"}
 function itemTier(n,p){if(CRAFTED.has(n))return"t-special";if(BOSS_ONLY.has(n))return"t-boss";return tier(p)}
 let cachedData={};
+// ── settings persistence ──
 function saveMin(){try{localStorage.setItem('minPrice',document.getElementById('minPrice').value);}catch(e){}}
-(function(){try{const v=localStorage.getItem('minPrice');if(v!==null)document.getElementById('minPrice').value=v;}catch(e){}})();
+let showUnder=false;
+function toggleMode(){showUnder=!showUnder;applyModeBtn();try{localStorage.setItem('showUnder',showUnder);}catch(e){}render();}
+function applyModeBtn(){const b=document.getElementById('modeBtn');b.textContent=showUnder?'< min':'\u2265 min';b.classList.toggle('under',showUnder);}
+(function(){
+  try{const v=localStorage.getItem('minPrice');if(v!==null)document.getElementById('minPrice').value=v;}catch(e){}
+  try{showUnder=localStorage.getItem('showUnder')==='true';}catch(e){}
+  applyModeBtn();
+})();
 
 function applySize(s){
   const r=document.documentElement.style;
@@ -152,7 +164,7 @@ function render(){
   const byBase=cachedData[league]||{};
   const cards=[];
   for(const baseName of ALL_BASES){
-    const items=(byBase[baseName]||[]).filter(i=>i.chaosValue>=minPrice);
+    const items=(byBase[baseName]||[]).filter(i=>showUnder?i.chaosValue<minPrice:i.chaosValue>=minPrice);
     if(!items.length)continue;
     const maxT=itemTier(items[0].name,items[0].chaosValue);
     let c='<div class="base-card"><div class="base-label"><span class="base-name">'+baseName+'</span><span class="base-max '+maxT+'">'+fmt(items[0].chaosValue)+'</span></div><div class="icons-row">';
